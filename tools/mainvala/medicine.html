@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Medicines</title><style>/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #dff2ff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    padding: 20px;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+.add-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.medicine-list {
+    margin-top: 20px;
+}
+
+.medicine-item {
+    background-color: #e0f7fa;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.medicine-info h2 {
+    margin: 0 0 5px 0;
+}
+
+.form-popup {
+    display: none; /* Hide the form initially */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+}
+  #medicineForm{
+width:100%;
+    padding:100px;
+  }
+
+.form-container {
+    max-width: 300px;
+}
+
+.form-container h2 {
+    margin: 0 0 20px;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.btn.cancel {
+    background-color: #ff0000;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Today's Medicines</h1>
+            <button class="add-btn" onclick="openForm()">+</button>
+        </div>
+        <div class="medicine-list" id="medicineList">
+            <!-- Medicines will be added here dynamically -->
+        </div>
+    </div>
+
+    <div class="form-popup" id="medicineForm">
+        <form class="form-container" onsubmit="addMedicine(event)">
+            <h2>Add Medicine</h2>
+            <label for="name"><b>Medicine Name</b></label>
+            <input type="text" id="name" placeholder="Enter Medicine Name" required>
+
+            <label for="dosage"><b>Dosage</b></label>
+            <input type="text" id="dosage" placeholder="Enter Dosage" required>
+
+            <label for="pillsPerDay"><b>Pills Per Day</b></label>
+            <input type="number" id="pillsPerDay" placeholder="Enter Pills Per Day" min="1" required>
+
+            <label for="instructions"><b>Instructions</b></label>
+            <input type="text" id="instructions" placeholder="Enter Instructions" required>
+
+            <label for="time"><b>Time</b></label>
+            <input type="time" id="time" required>
+
+            <button type="submit" class="btn">Add</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+    <script>// scripts.js
+function openForm() {
+    document.getElementById("medicineForm").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("medicineForm").style.display = "none";
+}
+
+function addMedicine(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Get values from the form
+    const name = document.getElementById("name").value;
+    const dosage = document.getElementById("dosage").value;
+    const pillsPerDay = parseInt(document.getElementById("pillsPerDay").value);
+    const instructions = document.getElementById("instructions").value;
+    const time = document.getElementById("time").value;
+
+    // Validate pillsPerDay value
+    if (pillsPerDay < 1) {
+        alert("Pills Per Day must be a positive number.");
+        return;
+    }
+
+    // Create a new medicine item
+    const medicineList = document.getElementById("medicineList");
+    const newItem = document.createElement("div");
+    newItem.classList.add("medicine-item");
+    newItem.innerHTML = `
+        <div class="medicine-info">
+            <h2>${name}</h2>
+            <p>${dosage}</p>
+            <p>${pillsPerDay} per day</p>
+            <p>${time}</p>
+        </div>
+    `;
+
+    // Add the new item to the list
+    medicineList.appendChild(newItem);
+
+    // Clear the form
+    document.getElementById("name").value = "";
+    document.getElementById("dosage").value = "";
+    document.getElementById("pillsPerDay").value = "";
+    document.getElementById("instructions").value = "";
+    document.getElementById("time").value = "";
+
+    // Close the form
+    closeForm();
+}
+</script>
+</body>
+</html>

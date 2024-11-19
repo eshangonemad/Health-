@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing Widget</title>
+  <style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f8ff;
+    font-family: Arial, sans-serif;
+}
+
+.widget {
+    text-align: center;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #00bfff;
+    margin: 0 auto 20px;
+    animation: breatheIn 4s ease-in-out infinite;
+}
+
+@keyframes breatheIn {
+    0%, 100% {
+        transform: scale(1);
+        background-color: #00bfff;
+    }
+    50% {
+        transform: scale(1.5);
+        background-color: #87ceeb;
+    }
+}
+
+#instruction {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+    <div class="widget">
+        <div class="circle" id="circle"></div>
+        <p id="instruction">Breathe In</p>
+    </div>
+    <script>const circle = document.getElementById('circle');
+const instruction = document.getElementById('instruction');
+
+let isBreathingIn = true;
+
+const updateInstruction = () => {
+    if (isBreathingIn) {
+        instruction.textContent = 'Breathe Out';
+    } else {
+        instruction.textContent = 'Breathe In';
+    }
+    isBreathingIn = !isBreathingIn;
+};
+
+setInterval(updateInstruction, 2000);
+</script>
+</body>
+</html>

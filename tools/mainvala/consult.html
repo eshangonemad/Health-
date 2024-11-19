@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkup</title>
+  <style>
+  /* style.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.checkup-container {
+    background-color: #dff2ff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+h1 {
+    margin: 0;
+}
+
+.content {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.appointment, .feeling {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.appointment h2, .feeling h2 {
+    margin: 0;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.chat-btn {
+    font-size: 24px;
+}
+</style>
+</head>
+<body>
+    <div class="checkup-container">
+        <div class="header">
+            <button class="back-btn" onclick="goBack()">&larr;</button>
+            <h1>Checkup</h1>
+        </div>
+        <div class="content">
+            <div class="appointment">
+                <h2>Book an appointment</h2>
+                <p>Consult a doctor</p>
+            </div>
+            <div class="feeling">
+                <h2>How are you feeling today?</h2>
+                <textarea id="feelingInput" placeholder="Enter your feelings here"></textarea>
+            </div>
+        </div>
+        <div class="footer">
+            <button class="chat-btn" onclick="sendMail()">&#128172;</button>
+        </div>
+    </div>
+
+    <script>// scripts.js
+function goBack() {
+    window.history.back();
+}
+
+function sendMail() {
+    const feelingText = document.getElementById("feelingInput").value;
+    const subject = "Health Checkup Feedback";
+    const body = How are you feeling today?\n\n${feelingText};
+    const mailtoLink = mailto:doctor@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)};
+
+    window.location.href = mailtoLink;
+}
+</script>
+</body>
+</html>
